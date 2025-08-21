@@ -1,16 +1,12 @@
 bool containsDuplicate(int* nums, int numsSize) {
-    int i = 0;
-    int j;
-    while( i < numsSize)
+    int cmp(const void *a, const void *b){
+        return (*(int *)a - *(int *)b);
+    }
+    qsort(nums, numsSize, sizeof(int), cmp);
+    for(int i = 0; i < numsSize - 1 ; i++)
     {
-        j = i + 1;
-        while(j < numsSize)
-        {
-            if(nums[i] == nums[j])
-                return true;
-            j++;
-        }
-        i++;
+        if(nums[i] == nums[i + 1])
+            return true;
     }
     return false;
 }
